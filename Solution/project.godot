@@ -10,14 +10,20 @@ config_version=5
 
 [application]
 
-config/name="FirstGame"
-run/main_scene="res://game.tscn"
+config/name="Bikini Bottom Knight"
+run/main_scene="res://BikiniBottomKnight.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://BikiniBottomKnight.png"
 
 [autoload]
 
 Music="*res://scenes/music.tscn"
+
+[importer_defaults]
+
+animation_library={
+"animation/fps": 60.0
+}
 
 [input]
 
