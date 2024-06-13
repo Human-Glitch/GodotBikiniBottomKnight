@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bi1qyfehja0hf"]
+[gd_scene load_steps=18 format=3 uid="uid://bi1qyfehja0hf"]
 
 [ext_resource type="Texture2D" uid="uid://tjnewt3nmdxt" path="res://sprites/world_tileset.png" id="1_yclrn"]
 [ext_resource type="PackedScene" uid="uid://dxwc4gxt2m6be" path="res://scenes/player.tscn" id="2_j1ryo"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://c24ncdgum4cxo" path="res://fonts/PixelOperator8.ttf" id="7_tg6ca"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="8_yf5fk"]
 [ext_resource type="FontFile" uid="uid://c4bgi5gsl4d22" path="res://fonts/PixelOperator8-Bold.ttf" id="9_vvxwp"]
+[ext_resource type="PackedScene" uid="uid://bore8d7mvtsc3" path="res://scenes/collectible.tscn" id="10_6t50u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2oova"]
 texture = ExtResource("1_yclrn")
@@ -237,12 +238,6 @@ texture = ExtResource("1_yclrn")
 8:6/0 = 0
 8:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:6/0/physics_layer_0/angular_velocity = 0.0
-0:7/0 = 0
-0:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:7/0/physics_layer_0/angular_velocity = 0.0
-1:7/0 = 0
-1:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:7/0/physics_layer_0/angular_velocity = 0.0
 3:7/0 = 0
 3:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:7/0/physics_layer_0/angular_velocity = 0.0
@@ -258,12 +253,6 @@ texture = ExtResource("1_yclrn")
 8:7/0 = 0
 8:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:7/0/physics_layer_0/angular_velocity = 0.0
-0:8/0 = 0
-0:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:8/0/physics_layer_0/angular_velocity = 0.0
-1:8/0 = 0
-1:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:8/0/physics_layer_0/angular_velocity = 0.0
 2:8/0 = 0
 2:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:8/0/physics_layer_0/angular_velocity = 0.0
@@ -432,23 +421,6 @@ tracks/0/keys = {
 "values": [Vector2(-223, -44)]
 }
 
-[sub_resource type="Animation" id="Animation_g1xlo"]
-resource_name = "move"
-length = 2.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(305, -172), Vector2(497, -172)]
-}
-
 [sub_resource type="Animation" id="Animation_gx5xc"]
 resource_name = "elevator"
 length = 4.0
@@ -464,6 +436,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-223, -44), Vector2(-223, -364)]
+}
+
+[sub_resource type="Animation" id="Animation_g1xlo"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(305, -172), Vector2(497, -172)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m1x40"]
@@ -502,7 +491,7 @@ shape = SubResource("WorldBoundaryShape2D_a2g2l")
 [node name="Coins" type="Node" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource("4_b62qq")]
-position = Vector2(90, 38)
+position = Vector2(89, 53)
 
 [node name="Coin2" parent="Coins" instance=ExtResource("4_b62qq")]
 position = Vector2(153, 6)
@@ -622,10 +611,10 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label3" type="Label" parent="Labels"]
-offset_left = 118.0
-offset_top = -304.0
-offset_right = 182.0
-offset_bottom = -296.0
+offset_left = 114.0
+offset_top = -339.0
+offset_right = 178.0
+offset_bottom = -331.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_tg6ca")
 theme_override_font_sizes/font_size = 8
@@ -646,3 +635,29 @@ theme_override_font_sizes/font_size = 8
 text = "You collected X coins."
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="CollectiblesLabel" type="Label" parent="GameManager"]
+offset_left = 90.0
+offset_top = -321.0
+offset_right = 205.0
+offset_bottom = -302.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_vvxwp")
+theme_override_font_sizes/font_size = 8
+text = "You found X collectibles."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Collectibles" type="Node" parent="."]
+
+[node name="Collectible1" parent="Collectibles" instance=ExtResource("10_6t50u")]
+position = Vector2(185, 65)
+
+[node name="Collectible2" parent="Collectibles" instance=ExtResource("10_6t50u")]
+position = Vector2(841, 2)
+
+[node name="Collectible3" parent="Collectibles" instance=ExtResource("10_6t50u")]
+position = Vector2(585, -94)
+
+[node name="Collectible4" parent="Collectibles" instance=ExtResource("10_6t50u")]
+position = Vector2(-103, -126)
